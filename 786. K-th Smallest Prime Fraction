@@ -1,0 +1,31 @@
+//this code is not optimize just used a brute force 
+class Solution {
+    public int[] kthSmallestPrimeFraction(int[] arr, int k) {
+        TreeMap<Double,ArrayList<Integer>> map = new TreeMap<>();
+        int answer[]=new int[2];
+
+        int p=k;
+        for(int i=0;i<arr.length-1;i++){
+            for(int j=i+1;j<arr.length;j++){
+               double b= (double) arr[i] / arr[j];
+               ArrayList<Integer>a=new ArrayList<>();
+               a.add(i);
+               a.add(j);
+               map.put(b,a);
+            }
+        
+        }
+        int kee = 1; // Variable to keep track of the current entry
+        for (Map.Entry<Double, ArrayList<Integer>> entry : map.entrySet()) {
+            if (kee == k) { // If we reach the kth entry
+                ArrayList<Integer> ans = entry.getValue();
+                answer[0] = arr[ans.get(0)];
+                answer[1] = arr[ans.get(1)];
+                break; // Exit the loop
+            }
+            kee++; // Move to the next entry
+        }
+
+        return answer;
+    }
+}
